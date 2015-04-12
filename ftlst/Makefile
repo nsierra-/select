@@ -10,15 +10,40 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftlst.a
+NAME =		libftlst.a
 
-SRC = lst_fn_tmp.c
+SRC =		elem_destroy.c \
+			elem_insert_between.c \
+			elem_swap.c \
+			lst_bubble_sort.c \
+			lst_clear.c \
+			lst_data_at.c \
+			lst_data_back.c \
+			lst_data_front.c \
+			lst_del.c \
+			lst_destroy.c \
+			lst_elem_at.c \
+			lst_elem_back.c \
+			lst_elem_front.c \
+			lst_get_size.c \
+			lst_insert.c \
+			lst_is_empty.c \
+			lst_pop_back.c \
+			lst_pop_front.c \
+			lst_print.c \
+			lst_push_back.c \
+			lst_push_front.c \
+			lst_remove.c \
+			lst_swap.c \
+			new_lst.c \
+			new_lstelem.c
 
-OBJ = $(SRC:.c=.o)
 
-CC = gcc
+OBJ = 		$(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CC = 		gcc
+
+CFLAGS = 	-Wall -Wextra -Werror
 
 all: $(NAME)
 
