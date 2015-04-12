@@ -12,5 +12,13 @@
 
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
+# include "ftlst.h"
+
+typedef struct	s_el
+{
+	char		*word;
+	int			current;
+	int			selected;
+}				t_el;
 
 #endif
