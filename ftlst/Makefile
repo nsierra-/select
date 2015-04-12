@@ -34,8 +34,10 @@ SRC =		elem_destroy.c \
 			lst_push_front.c \
 			lst_remove.c \
 			lst_swap.c \
+			lst_iterator_next.c \
 			new_lst.c \
-			new_lstelem.c
+			new_lstelem.c \
+			new_lstiter.c
 
 
 OBJ = 		$(SRC:.c=.o)

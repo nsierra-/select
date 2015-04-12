@@ -2,9 +2,7 @@
 Simple tools around a generic doubly linked list written in ANSI C.
 
 # Install
-Warning, this branch uses `libft` as well, see [libft](https://github.com/nsierra-/libft). Checkout to the `classic` branch in order to use only the classic `libc`.
-If you're using this lib at school, beware that the `libft` location is correctly set in the lib `Makefile`.
-Otherwise, it's pretty obvious :
+It's pretty obvious :
 ```sh
 cd yourproject
 git clone https://github.com/nsierra-/ftlst.git
@@ -54,6 +52,12 @@ int             main(void)
     /* ACCESSING DATA */
     puts(lst_data_at(lst, 1));      /* Prints "baz" */
     puts(lst_data_back(lst));       /* Prints "bar" */
+    
+    /* ITERATION */
+    it = new_lstiter(lst, decreasing);
+    while (lst_iterator_next(it))
+        puts(it->data);
+    free(it);
 
     /* MODIFY LIST */
     lst_swap(lst, 1, 2);            /* Swapping second ("baz") and third ("bar") element */

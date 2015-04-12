@@ -14,12 +14,29 @@
 # define FTLST_H
 # include <stddef.h>
 
+typedef enum			e_lst_direction
+{
+	increasing,
+	decreasing,
+	end
+}						t_lst_direction;
+
 typedef struct			s_lstelem
 {
 	void				*data;
 	struct s_lstelem	*prev;
 	struct s_lstelem	*next;
 }						t_lstelem;
+
+typedef struct			s_lstiter
+{
+	void				*data;
+	t_lstelem			*current;
+	t_lstelem			*end;
+	t_lst_direction		dir;
+	int					flag;
+
+}						t_lstiter;
 
 typedef struct			s_lst
 {
@@ -116,5 +133,14 @@ void					lst_clear(t_lst *lst);
 ** the pointer to NULL.
 */
 void					lst_destroy(t_lst **lst);
+/*
+** Creates an interator for a list, considering a direction.
+*/
+t_lstiter				*new_lstiter(t_lst *lst, t_lst_direction dir);
+/*
+** Used to iterate through list considering the iterator position.
+** Returns 0 if iteration is over, 1 othewise.
+*/
+int						lst_iterator_next(t_lstiter *it);
 
 #endif
