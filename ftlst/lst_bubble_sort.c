@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ftlst.h"
+#include "ftlst_elem.h"
 
 void					lst_bubble_sort(t_lst *lst, int (*cmp)(void *, void *))
 {

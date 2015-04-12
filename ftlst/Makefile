@@ -20,7 +20,6 @@ SRC =		elem_destroy.c \
 			lst_data_at.c \
 			lst_data_back.c \
 			lst_data_front.c \
-			lst_del.c \
 			lst_destroy.c \
 			lst_elem_at.c \
 			lst_elem_back.c \

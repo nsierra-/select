@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ftlst.h"
+#include "ftlst_elem.h"
 
 int						lst_insert(t_lst *lst, void *data, size_t pos)
 {
@@ -22,9 +23,7 @@ int						lst_insert(t_lst *lst, void *data, size_t pos)
 	if (pos >= lst_get_size(lst))
 		return (0);
 	i = 0;
-	cursor = lst_elem_front(lst);
-	while (i++ < pos)
-		cursor = cursor->next;
+	cursor = lst_elem_at(lst, pos);
 	elem_insert_between(new_lstelem(data), cursor->prev, cursor);
 	return (++lst->size);
 }

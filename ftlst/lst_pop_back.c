@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ftlst.h"
+#include "ftlst_elem.h"
 
 void					*lst_pop_back(t_lst *lst)
 {

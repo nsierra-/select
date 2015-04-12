@@ -14,21 +14,21 @@
 
 void	elem_insert_between(
 			t_lstelem *to_insert,
-			t_lstelem *before,
-			t_lstelem *after)
+			t_lstelem *left,
+			t_lstelem *right)
 {
-	if (before == after)
+	if (left == right)
 	{
-		after->prev = to_insert;
-		after->next = to_insert;
-		to_insert->prev = after;
-		to_insert->next = after;
+		right->prev = to_insert;
+		right->next = to_insert;
+		to_insert->prev = left;
+		to_insert->next = left;
 	}
 	else
 	{
-		to_insert->prev = before;
-		to_insert->next = after;
-		before->next = to_insert;
-		after->prev = to_insert;
+		to_insert->prev = left;
+		to_insert->next = right;
+		left->next = to_insert;
+		right->prev = to_insert;
 	}
 }

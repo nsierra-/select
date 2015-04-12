@@ -12,16 +12,43 @@
 
 #include "ftlst.h"
 
-t_lstelem		*lst_elem_at(t_lst *lst, size_t pos)
+static t_lstelem	*reg_search(t_lst *lst, size_t pos)
 {
-	t_lstelem	*cursor;
-	size_t		i;
+	t_lstelem		*cursor;
+	size_t			i;
 
-	if (pos >= lst_get_size(lst))
-		return (NULL);
-	i = 0;
 	cursor = lst_elem_front(lst);
+	i = 0;
 	while (i++ < pos)
 		cursor = cursor->next;
 	return (cursor);
+}
+
+static t_lstelem	*rev_search(t_lst *lst, size_t pos, size_t offset)
+{
+	t_lstelem		*cursor;
+	size_t			i;
+
+	cursor = lst_elem_back(lst);
+	i = offset;
+	while (offset-- > pos)
+		cursor = cursor->prev;
+	return (cursor);
+}
+
+t_lstelem			*lst_elem_at(t_lst *lst, size_t pos)
+{
+	size_t			lsize;
+
+	lsize = lst_get_size(lst);
+	if (pos >= lsize)
+		return (NULL);
+	else if (pos == 0)
+		return (lst_elem_front(lst));
+	else if (pos == lsize - 1)
+		return (lst_elem_back(lst));
+	else if (pos <= (lsize / 2))
+		return (reg_search(lst, pos));
+	else
+		return (rev_search(lst, pos, lsize - 1));
 }
