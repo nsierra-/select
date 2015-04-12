@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_bubble_sort.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsierra- <nsierra-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/04/12 03:55:09 by nsierra-          #+#    #+#             */
+/*   Updated: 2015/04/12 04:02:56 by nsierra-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ftlst.h"
 
 void					lst_bubble_sort(t_lst *lst, int (*cmp)(void *, void *))
 {
 	int					sorted;
 	t_lstelem			*cursor;
-
 
 	sorted = 0;
 	if (lst_get_size(lst) == 1)
