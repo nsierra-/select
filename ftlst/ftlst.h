@@ -32,6 +32,7 @@ typedef struct			s_lstiter
 {
 	void				*data;
 	t_lstelem			*current;
+	size_t				pos;
 	t_lstelem			*end;
 	t_lst_direction		dir;
 	int					flag;
@@ -107,6 +108,15 @@ void					*lst_pop_front(t_lst *lst);
 */
 int						lst_insert(t_lst *lst, void *data, size_t pos);
 /*
+** Changes the head of the list given a position. If position is invalid,
+** the function does nothing.
+*/
+void					lst_change_first_by_pos(t_lst *lst, size_t pos);
+/*
+** Changes the head of the list given an element.
+*/
+void					lst_change_first_by_elem(t_lst *lst, t_lstelem *elem);
+/*
 ** Deletes element at pos if pos is valid and returns a pointer to the data
 ** (in case you must free it).
 */
@@ -129,10 +139,10 @@ void					lst_print(t_lst *lst, void (*print_f)(void *), int m);
 */
 void					lst_clear(t_lst *lst);
 /*
-** Frees all elements, all data, the list in itself and sets
-** the pointer to NULL.
+** Frees all elements, all data using f, the list in itself and sets
+** its pointer to NULL. Pass NULL as f if you do not want to free the data.
 */
-void					lst_destroy(t_lst **lst);
+void					lst_destroy(t_lst **lst, void (*f)(void *));
 /*
 ** Creates an interator for a list, considering a direction.
 */

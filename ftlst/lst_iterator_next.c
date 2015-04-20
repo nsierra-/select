@@ -31,5 +31,9 @@ int			lst_iterator_next(t_lstiter *it)
 	it->data = it->current->data;
 	if (it->current == it->end)
 		has_ended_or_skip(it);
+	if (it->dir == increasing)
+		++it->pos;
+	else
+		--it->pos;
 	return (it->dir == end ? 0 : 1);
 }

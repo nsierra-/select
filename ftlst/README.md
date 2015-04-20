@@ -18,6 +18,7 @@ A simple use case :
 ```c
 #include "ftlst.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 void            print_lst(void *d1)
@@ -37,9 +38,10 @@ int             main(void)
 {
     t_lst       *lst;
     t_lstelem   *cursor;
-    char        *foo = "foo";
-    char        *bar = "bar";
-    char        *baz = "baz";
+    t_lstiter   *it;
+    char        *foo = strdup("foo");
+    char        *bar = strdup("bar");
+    char        *baz = strdup("baz");
 
     /* CREATING LIST */
     lst = new_lst();
@@ -52,7 +54,7 @@ int             main(void)
     /* ACCESSING DATA */
     puts(lst_data_at(lst, 1));      /* Prints "baz" */
     puts(lst_data_back(lst));       /* Prints "bar" */
-    
+
     /* ITERATION */
     it = new_lstiter(lst, decreasing);
     while (lst_iterator_next(it))
@@ -67,8 +69,7 @@ int             main(void)
     lst_bubble_sort(lst, cmp);      /* Bubble-sorting the list using cmp */
     lst_print(lst, print_lst, 0);   /* Order is now "baz, foo" */
 
-    lst_clear(lst);                 /* Destroying list (but not the data !) */
+    lst_destroy(&lst, free);         /* Destroying list, using free for data */
     return (0);
 }
-
 ```

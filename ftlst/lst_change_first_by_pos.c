@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_destroy.c                                      :+:      :+:    :+:   */
+/*   lst_change_first_by_pos.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsierra- <nsierra-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsierra- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/04/12 03:55:44 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/04/12 03:56:28 by nsierra-         ###   ########.fr       */
+/*   Created: 2015/04/21 00:41:38 by nsierra-          #+#    #+#             */
+/*   Updated: 2015/04/21 00:41:39 by nsierra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ftlst.h"
-#include <stdlib.h>
 
-void					lst_destroy(t_lst **lst, void (*f)(void *))
+void			lst_change_first_by_pos(t_lst *lst, size_t pos)
 {
-	void				*data;
-	t_lst				*list;
+	t_lstelem	*elem;
 
-	list = *lst;
-	while ((data = lst_pop_back(list)))
-	{
-		if (f)
-			f(data);
-	}
-	free(list);
-	*lst = NULL;
+	if (!(elem = lst_elem_at(lst, pos)))
+		return ;
+	lst_change_first_by_elem(lst, elem);
 }

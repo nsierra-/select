@@ -35,6 +35,8 @@ SRC =		elem_destroy.c \
 			lst_remove.c \
 			lst_swap.c \
 			lst_iterator_next.c \
+			lst_change_first_by_pos.c \
+			lst_change_first_by_elem.c \
 			new_lst.c \
 			new_lstelem.c \
 			new_lstiter.c
@@ -44,7 +46,7 @@ OBJ = 		$(SRC:.c=.o)
 
 CC = 		gcc
 
-CFLAGS = 	-pedantic -Wall -Wextra -Werror
+CFLAGS = 	-pedantic -Wall -Wextra -Werror -g3
 
 all: $(NAME)
 

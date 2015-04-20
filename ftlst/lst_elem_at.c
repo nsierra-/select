@@ -27,10 +27,8 @@ static t_lstelem	*reg_search(t_lst *lst, size_t pos)
 static t_lstelem	*rev_search(t_lst *lst, size_t pos, size_t offset)
 {
 	t_lstelem		*cursor;
-	size_t			i;
 
 	cursor = lst_elem_back(lst);
-	i = offset;
 	while (offset-- > pos)
 		cursor = cursor->prev;
 	return (cursor);
