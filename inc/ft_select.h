@@ -13,12 +13,30 @@
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 # include "ftlst.h"
+# include <termios.h>
 
-typedef struct	s_el
+typedef struct		s_el
 {
-	char		*word;
-	int			current;
-	int			selected;
-}				t_el;
+	char			*word;
+	int				current;
+	int				selected;
+	size_t			size;
+}					t_el;
+
+typedef struct		s_env
+{
+	t_lst			*lst;
+	int				term_fd;
+	struct termios	term;
+}					t_env;
+
+void				print_list(t_env *e);
+void				delete_element(void *data);
+int					init_termcaps(void);
+void				restore_termcaps(void);
+int					exit_ftselect(int ret);
+t_env				*get_env(void);
+void				signal_handler(int sig);
+int					ft_putrchar(int c);
 
 #endif

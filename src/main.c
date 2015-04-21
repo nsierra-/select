@@ -1,7 +1,10 @@
 #include "libft.h"
 #include "ftlst.h"
 #include "ft_select.h"
+#include <signal.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
 
 static void		load_lst(t_lst *l, int ac, char **av)
 {
@@ -24,26 +27,37 @@ static void		load_lst(t_lst *l, int ac, char **av)
 	first->current = 1;
 }
 
-void			pl(void *data)
+static t_env	*init_env(void)
 {
-	t_el		*dt;
+	t_env		*e;
 
-	dt = (t_el *)data;
-	if (dt->current)
-		ft_putstr("---> ");
-	ft_putstr(dt->word);
-	if (dt->selected)
-		ft_putstr("\nSelected");
+	if (!getenv("TERM"))
+		return (NULL);
+	e = get_env();
+	e->term_fd = -1;
+	if (!(e->lst = new_lst()))
+		return (NULL);
+	signal(SIGINT, signal_handler);
+	signal(SIGTSTP, signal_handler);
+	signal(SIGCONT, signal_handler);
+	init_termcaps();
+	return (e);
 }
 
 int				main(int ac, char **av)
 {
-	t_lst		*lst;
+	t_env		*e;
+	char		buf[4];
 
-	if (!(lst = new_lst()) || ac == 1)
+	ft_bzero(buf, 4);
+	if (ac == 1 || !init_env())
 		return (EXIT_FAILURE);
-	load_lst(lst, ac, av);
-	lst_print(lst, pl, 0);
-	lst_destroy(&lst);
-	return (EXIT_SUCCESS);
+	e = init_env();
+	load_lst(e->lst, ac, av);
+	while (42)
+	{
+		print_list(e);
+		read(0, buf, 4);
+	}
+	return (exit_ftselect(EXIT_SUCCESS));
 }

@@ -15,6 +15,5 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	ft_putstr("putchar_fd  ");
 	write(fd, &c, 1);
 }

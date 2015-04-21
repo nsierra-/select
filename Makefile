@@ -14,7 +14,15 @@ NAME		=	ft_select
 
 INC_FILES	=	ft_select.h
 
-SRC_FILES	=	main.c
+SRC_FILES	=	main.c \
+				delete_element.c \
+				print_list.c \
+				get_env.c \
+				exit_ftselect.c \
+				init_termcaps.c \
+				signal_handler.c \
+				restore_termcaps.c \
+				ft_putrchar.c
 
 SRC			=	$(addprefix src/, $(SRC_FILES))
 INC			=	$(addprefix inc/, $(INC_FILES))
@@ -25,7 +33,7 @@ MAKE		=	make
 
 CFLAGS		=	-g3 -Wall -Wextra -Werror
 IFLAGS		=	-I./inc/ -I./libft/ -I./ftlst/
-LDFLAGS		=	-L./libft/ -lft -L./ftlst/ -lftlst
+LDFLAGS		=	-L./libft/ -lft -L./ftlst/ -lftlst -ltermcap
 
 
 $(NAME):		$(INC) $(OBJ)
