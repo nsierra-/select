@@ -14,6 +14,7 @@
 # define FT_SELECT_H
 # include "ftlst.h"
 # include <termios.h>
+# define BS (buf[0] == 27 && buf[1] == 91 && buf[2] == 51)
 
 typedef struct		s_el
 {
@@ -38,5 +39,7 @@ int					exit_ftselect(int ret);
 t_env				*get_env(void);
 void				signal_handler(int sig);
 int					ft_putrchar(int c);
+int					update_list(t_env *e, const char *buf);
+void				chose_mode(t_env *e, t_el *data);
 
 #endif

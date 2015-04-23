@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <term.h>
 
 static void		load_lst(t_lst *l, int ac, char **av)
 {
@@ -44,20 +45,45 @@ static t_env	*init_env(void)
 	return (e);
 }
 
+static void		print_result(t_lst *lst)
+{
+	t_lstiter	*it;
+
+	tputs(tgoto(tgetstr("cm", NULL), 0, 0), 1, ft_putrchar);
+	tputs(tgetstr("cl", NULL), 1, ft_putrchar);
+	tputs(tgetstr("ve", NULL), 1, ft_putrchar);
+	tputs(tgetstr("te", NULL), 1, ft_putrchar);
+	it = new_lstiter(lst, increasing);
+	while (lst_iterator_next(it))
+	{
+		if (((t_el *)it->data)->selected)
+		{
+			ft_putstr_fd(((t_el *)it->data)->word, 1);
+			ft_putstr_fd(" ", 1);
+		}
+	}
+	free(it);
+}
+
 int				main(int ac, char **av)
 {
 	t_env		*e;
 	char		buf[4];
 
-	ft_bzero(buf, 4);
 	if (ac == 1 || !init_env())
 		return (EXIT_FAILURE);
 	e = init_env();
 	load_lst(e->lst, ac, av);
 	while (42)
 	{
+		ft_bzero(buf, 4);
 		print_list(e);
-		read(0, buf, 4);
+		if (read(0, buf, 4) < 0)
+			return (exit_ftselect(EXIT_FAILURE));
+		if (!update_list(e, buf))
+			break ;
 	}
-	return (exit_ftselect(EXIT_SUCCESS));
+	print_result(e->lst);
+	lst_destroy(&e->lst, delete_element);
+	return (EXIT_SUCCESS);
 }

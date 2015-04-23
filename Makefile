@@ -22,7 +22,9 @@ SRC_FILES	=	main.c \
 				init_termcaps.c \
 				signal_handler.c \
 				restore_termcaps.c \
-				ft_putrchar.c
+				ft_putrchar.c \
+				update_list.c \
+				chose_mode.c
 
 SRC			=	$(addprefix src/, $(SRC_FILES))
 INC			=	$(addprefix inc/, $(INC_FILES))
