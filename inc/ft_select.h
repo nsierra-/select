@@ -28,6 +28,8 @@ typedef struct		s_env
 {
 	t_lst			*lst;
 	struct termios	term;
+	size_t			l;
+	size_t			c;
 }					t_env;
 
 void				print_list(t_env *e);

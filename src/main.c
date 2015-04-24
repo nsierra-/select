@@ -40,6 +40,7 @@ static t_env	*init_env(void)
 	signal(SIGINT, signal_handler);
 	signal(SIGTSTP, signal_handler);
 	signal(SIGCONT, signal_handler);
+	signal(SIGWINCH, signal_handler);
 	init_termcaps();
 	return (e);
 }

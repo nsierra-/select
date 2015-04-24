@@ -17,9 +17,22 @@ static void			send_suspend_signal(void)
 	ioctl(0, TIOCSTI, cp);
 }
 
+static void			resize_sig()
+{
+	t_env			*e;
+	char			*name_term;
+
+	e = get_env();
+	if (!(name_term = getenv("TERM")))
+		return ;
+	if (tgetent(NULL, name_term) != 1)
+		return ;
+	e->l = tgetnum("li");
+	e->c = tgetnum("co");
+}
+
 void				signal_handler(int sig)
 {
-
 	if (sig == SIGINT)
 		exit(exit_ftselect(sig) + 128);
 	else if (sig == SIGTSTP)
@@ -34,4 +47,6 @@ void				signal_handler(int sig)
 		signal(SIGTSTP, signal_handler);
 		init_termcaps();
 	}
+	else if (sig == SIGWINCH)
+		resize_sig();
 }
