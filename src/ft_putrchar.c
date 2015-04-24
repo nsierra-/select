@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putrchar.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsierra- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/04/24 16:25:04 by nsierra-          #+#    #+#             */
+/*   Updated: 2015/04/24 16:25:22 by nsierra-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-int        ft_putrchar(int c)
+int		ft_putrchar(int c)
 {
-    write(isatty(STDOUT_FILENO), &c, 1);
-    return (c);
+	write(isatty(STDOUT_FILENO), &c, 1);
+	return (c);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsierra- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/04/24 16:25:17 by nsierra-          #+#    #+#             */
+/*   Updated: 2015/04/24 16:25:22 by nsierra-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 #include <signal.h>
 #include <stdlib.h>
@@ -17,7 +29,7 @@ static void			send_suspend_signal(void)
 	ioctl(0, TIOCSTI, cp);
 }
 
-static void			resize_sig()
+static void			resize_sig(void)
 {
 	t_env			*e;
 	char			*name_term;
