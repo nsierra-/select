@@ -1,31 +1,36 @@
 #include "ft_select.h"
 #include "libft.h"
 #include <term.h>
+#include <unistd.h>
 
 static void			normal_mode(t_env *e, t_el *data)
 {
-	ft_putstr_fd(data->word, e->term_fd);
+	(void)e;
+	ft_putstr_fd(data->word, isatty(STDOUT_FILENO));
 }
 
 static void			selected_mode(t_env *e, t_el *data)
 {
+	(void)e;
 	tputs(tgetstr("mr", NULL), 1, ft_putrchar);
-	ft_putstr_fd(data->word, e->term_fd);
+	ft_putstr_fd(data->word, isatty(STDOUT_FILENO));
 	tputs(tgetstr("me", NULL), 1, ft_putrchar);
 }
 
 static void			current_mode(t_env *e, t_el *data)
 {
+	(void)e;
 	tputs(tgetstr("us", NULL), 1, ft_putrchar);
-	ft_putstr_fd(data->word, e->term_fd);
+	ft_putstr_fd(data->word, isatty(STDOUT_FILENO));
 	tputs(tgetstr("ue", NULL), 1, ft_putrchar);
 }
 
 static void			hardcore_mode(t_env *e, t_el *data)
 {
+	(void)e;
 	tputs(tgetstr("us", NULL), 1, ft_putrchar);
 	tputs(tgetstr("mr", NULL), 1, ft_putrchar);
-	ft_putstr_fd(data->word, e->term_fd);
+	ft_putstr_fd(data->word, isatty(STDOUT_FILENO));
 	tputs(tgetstr("ue", NULL), 1, ft_putrchar);
 	tputs(tgetstr("me", NULL), 1, ft_putrchar);
 }

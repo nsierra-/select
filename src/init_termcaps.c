@@ -9,7 +9,7 @@
 static int			stdstream_check(t_env *e)
 {
 	if (isatty(STDOUT_FILENO))
-		return (e->term_fd = STDOUT_FILENO);
+		return (e->term_fd = isatty(STDOUT_FILENO));
 	else
 		return (ENOTTY);
 }
