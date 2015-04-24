@@ -27,7 +27,6 @@ typedef struct		s_el
 typedef struct		s_env
 {
 	t_lst			*lst;
-	int				term_fd;
 	struct termios	term;
 }					t_env;
 

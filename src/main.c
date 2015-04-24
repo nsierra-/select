@@ -35,7 +35,6 @@ static t_env	*init_env(void)
 	if (!getenv("TERM"))
 		return (NULL);
 	e = get_env();
-	e->term_fd = -1;
 	if (!(e->lst = new_lst()))
 		return (NULL);
 	signal(SIGINT, signal_handler);
@@ -70,9 +69,8 @@ int				main(int ac, char **av)
 	t_env		*e;
 	char		buf[4];
 
-	if (ac == 1 || !init_env())
+	if (ac == 1 || !(e = init_env()))
 		return (EXIT_FAILURE);
-	e = init_env();
 	load_lst(e->lst, ac, av);
 	while (42)
 	{
