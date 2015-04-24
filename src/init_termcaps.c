@@ -6,19 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static int			stdstream_check(t_env *e)
-{
-	if (isatty(STDOUT_FILENO))
-		return (e->term_fd = isatty(STDOUT_FILENO));
-	else
-		return (ENOTTY);
-}
-
 int					init_termcaps(void)
 {
 	t_env			*e;
 	char			*name_term;
-	int				ret;
 
 	e = get_env();
 	if (e->term_fd != -1)
@@ -27,13 +18,15 @@ int					init_termcaps(void)
 		return (0);
 	tgetent(NULL, name_term);
 	tcgetattr(0, &e->term);
-	if ((ret = stdstream_check(e)) == ENOTTY)
-		return (ret);
 	e->term.c_lflag &= ~(ICANON | ECHO);
 	e->term.c_cc[VMIN] = 0;
 	e->term.c_cc[VTIME] = 1;
-	if (tcsetattr(e->term_fd, TCSADRAIN, &e->term) == -1)
+	if (tcsetattr(isatty(STDOUT_FILENO), TCSADRAIN, &e->term) == -1)
+	{
+		dprintf(2, "Damn.");
 		return (-1);
+	}
+	dprintf(2, "TEST");
 	tputs(tgetstr("ti", NULL), 1, ft_putrchar);
 	tputs(tgetstr("vi", NULL), 1, ft_putrchar);
 	return (1);
